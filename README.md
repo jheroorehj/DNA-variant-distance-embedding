@@ -85,6 +85,9 @@
 │   └── inference.py           # 추론 및 임베딩 생성 코드
 ├── requirements.txt
 ├── README.md
+├── Data_Preprocessing.md
+├── Train.md
+├── Inference.md
 └── .gitignore
 ```
 ## 🚫 데이터 및 모델 재배포 안내 (중요)
