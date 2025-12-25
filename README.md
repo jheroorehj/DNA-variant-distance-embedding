@@ -86,11 +86,48 @@ ClinVar (VCF) + Reference Genome (hg38 FASTA)
 <a id="team"></a>
 ## 1-1. 👥 팀원 소개
 
-|  |  |  |  |  |
-|:--:|:--:|:--:|:--:|:--:|
-|  |  | <img src="https://avatars.githubusercontent.com/u/150754838?v=4" width="200px" alt="장영웅"> |  |  |
-| 안준식<br>Lead Researcher | 윤여헌<br>ML Engineer | 장영웅<br>Model Engineer | 이정원<br>Data Engineer | 조민성<br>Data Researcher |
-| 연구 총괄, 문제 정의,<br>전체 모델 아키텍처 방향 설계 | 학습 파이프라인 구현,<br>파인튜닝 및 실험 실행 | 보정 파이프라인 수정,<br>실험 관리, 모델 성능 비교 | 데이터 전처리,<br>데이터셋 생성 파이프라인 구축 | ClinVar 기반 변이 분석,<br>병원성 특성 연구 |
+<table>
+  <tr>
+    <td align="center" width="220">
+      <img src="https://placehold.co/200x200?text=%EC%95%88%EC%A4%80%EC%8B%9D" width="200" height="200" alt="안준식"><br>
+      안준식<br><sub>Lead Researcher</sub>
+    </td>
+    <td align="center" width="220">
+      <img src="https://placehold.co/200x200?text=%EC%9C%A4%EC%97%AC%ED%97%8C" width="200" height="200" alt="윤여헌"><br>
+      윤여헌<br><sub>Bio-ML Engineer</sub>
+    </td>
+    <td align="center" width="220">
+      <img src="https://avatars.githubusercontent.com/u/150754838?v=4" width="200" height="200" alt="장영웅"><br>
+      장영웅<br><sub>Read Model Engineer</sub>
+    </td>
+    <td align="center" width="220">
+      <img src="https://placehold.co/200x200?text=%EC%9D%B4%EC%A0%95%EC%9B%90" width="200" height="200" alt="이정원"><br>
+      이정원<br><sub>Data Engineer</sub>
+    </td>
+    <td align="center" width="220">
+      <img src="https://placehold.co/200x200?text=%EC%A1%B0%EB%AF%BC%EC%84%B1" width="200" height="200" alt="조민성"><br>
+      조민성<br><sub>Data Researcher</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="220">
+      연구 총괄, 문제 정의, 전체 모델 아키텍처 방향 설계
+    </td>
+    <td align="center" width="220">
+      의생명 서열 데이터 기반<br>학습 파이프라인 구현,<br>변이·서열 특성 성능 분석
+    </td>
+    <td align="center" width="220">
+      학습 파이프라인 최적화,<br>지표 정합성 개선, 파인튜닝<br>기반 성능 향상·안정화
+    </td>
+    <td align="center" width="220">
+      데이터 전처리, 데이터셋 생성 파이프라인 구축
+    </td>
+    <td align="center" width="220">
+      ClinVar 기반 변이 분석, 병원성 특성 연구
+    </td>
+  </tr>
+</table>
+
 
 ---
 
@@ -173,7 +210,7 @@ ClinVar (VCF) + Reference Genome (hg38 FASTA)
 
 Mutation Focus Loss용 local distance는 $\ell$을 정규화 후 동일하게 계산합니다.
 
-- $\hat{d}_{local} = 1 - cos(norm(l_{ref}), norm(l_{var}))$
+- $`\hat{d}_{\mathrm{local}} = 1 - \cos\big(\mathrm{norm}(\ell_{\mathrm{ref}}),\ \mathrm{norm}(\ell_{\mathrm{var}})\big)`$
 
 
 ---
@@ -203,7 +240,7 @@ Mutation Focus Loss용 local distance는 $\ell$을 정규화 후 동일하게 �
 모든 $\hat{d}$는 (Reference, Variant) 최종 임베딩의 cosine distance입니다.
 
 - 최종 거리: $\hat{d}=1-\cos(z_{ref},z_{var})$
-local 거리: $\hat{d}_{local} = 1 - cos(norm(l_{ref}), norm(l_{var}))$
+local 거리: $`\hat{d}_{\mathrm{local}} = 1 - \cos\big(\mathrm{norm}(\ell_{\mathrm{ref}}),\ \mathrm{norm}(\ell_{\mathrm{var}})\big)`$
 - 타깃 거리: $d^{\ast}=2s$  (코드에서 `target_dist = score * 2.0`)
 
 배치에서 Pathogenic 집합 $P=\{i\mid y_i=1\}$, Benign 집합 $B=\{i\mid y_i=0\}$로 두면,
@@ -294,7 +331,7 @@ w_{reg}\mathcal{L}_{reg}
 
 ### 지표 수학적 정의
 
-거리 배열 $D=(\hat{d}_i)_{i=1}^{N}$에 대해,
+거리 배열 $`D=\{\hat{d}_i\}_{i=1}^{N}`$에 대해,
 
 - CD (Cosine Distance Mean)
 
